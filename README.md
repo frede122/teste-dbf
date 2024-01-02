@@ -15,6 +15,8 @@ Você deverá desenvolver uma API REST para gerenciar esses produtos e categoria
 Utize o framework que desejar desde que preencha os pré-requisitos das linguagens acima. 
 Mas recomendamos para o frontend: Angular ou React e para o backend: SpringBoot para o caso de Java e NestJS para o caso de NodeJS.
 
+Crie um fork desse repositório, e faça os commits com o código lá.
+
 ### O que esperamos 
 
 #### Backend
