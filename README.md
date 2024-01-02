@@ -12,6 +12,8 @@ Você deverá desenvolver uma tela simples onde um usuario poderá cadastrar cat
 
 Você deverá desenvolver uma API REST para gerenciar esses produtos e categorias de produtos. Dessa forma, deverá existir rotas para o CRUD tanto das categorias quanto dos produtos.
 
+Utize o framework que desejar desde que preencha os pré-requisitos das linguagens acima. 
+Mas recomendamos para o frontend: Angular ou React e para o backend: SpringBoot para o caso de Java e NestJS para o caso de NodeJS.
 
 ### O que esperamos 
 
