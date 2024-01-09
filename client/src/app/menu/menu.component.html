@@ -1,0 +1,55 @@
+<mat-drawer-container [hasBackdrop]="false" class="container-menu" autosize>
+    <mat-toolbar class="bar" color="primary">
+        <span>
+            <button class="menu" mat-icon-button (click)="drawer.toggle()">
+                <mat-icon color="white">menu</mat-icon>
+            </button>
+            <h1 class="titulo">Teste</h1>
+
+        </span>
+        <h1 class="titulo"></h1>
+    </mat-toolbar>
+
+    <mat-drawer color="primary" #drawer class="sidenav" opened mode="side">
+        <ul class="list">
+            <li class="list-item">
+                <a [routerLink]="['']" routerLinkActive="router-link-active">
+                    <mat-icon color="primary">dashboard_customize</mat-icon> Inicio
+                </a>
+            </li>
+        </ul>
+        <p class="menu-itens">
+            <mat-expansion-panel>
+                <mat-expansion-panel-header>
+                    <mat-panel-title>
+                        <mat-icon color="primary">post_add</mat-icon>
+                        Produtos
+                    </mat-panel-title>
+                </mat-expansion-panel-header>
+                <ul class="list">
+                    <li class="list-item">
+                        <a [routerLink]="['product-list']" routerLinkActive="router-link-active">
+                            <mat-icon color="primary">arrow_right</mat-icon>Lista de Produtos
+                        </a>
+                    </li>
+                    <li class="list-item">
+                        <a [routerLink]="['product-form']" routerLinkActive="router-link-active">
+                            <mat-icon color="primary">arrow_right</mat-icon>Cadastro de Produto
+                        </a>
+                    </li>
+                    <li class="list-item">
+                        <a [routerLink]="['category-list']" routerLinkActive="router-link-active">
+                            <mat-icon color="primary">arrow_right</mat-icon>Lista de Categorias
+                        </a>
+                    </li>
+                </ul>
+
+            </mat-expansion-panel>
+        </p>
+    </mat-drawer>
+
+    <div class="ng-content">
+        <ng-content></ng-content>
+    </div>
+
+</mat-drawer-container>

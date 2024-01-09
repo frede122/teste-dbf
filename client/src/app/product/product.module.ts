@@ -6,7 +6,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatButtonModule } from '@angular/material/button';
-import { MatDialogModule } from '@angular/material/dialog';
+import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 
 import { ProductFormComponent } from './product-form/product-form.component';
 import { ProductListComponent } from './product-list/product-list.component';
@@ -33,6 +33,7 @@ import { CategoryFormComponent } from './category/category-form/category-form.co
     ReactiveFormsModule,
     CommonModule,
     AsyncPipe
-  ]
+  ],
+  providers: []
 })
 export class ProductModule { }

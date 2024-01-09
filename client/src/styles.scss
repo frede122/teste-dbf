@@ -3,6 +3,10 @@
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
+:root {
+    --default-color-text-menu: rgb(31, 44, 93);
+}
+
 .mat-cancel {
     color: white !important;
     background-color: rgb(128, 0, 19) !important;
