@@ -2,3 +2,12 @@
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.mat-cancel {
+    color: white !important;
+    background-color: rgb(128, 0, 19) !important;
+}
+.mat-cancel:hover {
+    color: white !important;
+    background-color: rgb(153, 12, 33) !important;
+}
