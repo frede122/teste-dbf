@@ -4,6 +4,8 @@ import { Observable, map, startWith } from 'rxjs';
 import { MatDialog } from '@angular/material/dialog';
 import { CategoryFormComponent } from '../category/category-form/category-form.component';
 import { Category } from 'src/app/models/product/category.model';
+import { ValidatorsForm } from 'src/app/helpers/validators-form';
+import { ErrorMessageService } from 'src/app/shared/service/error-message.service';
 
 @Component({
   selector: 'app-product-form',
@@ -20,17 +22,28 @@ export class ProductFormComponent implements OnInit{
 
   constructor(
     public dialog: MatDialog,
+    public errorMessage: ErrorMessageService
   ){
     this.productForm = new FormGroup({
       name: new FormControl("", [Validators.required]),
       description: new FormControl("", [Validators.required]),
-      value: new FormControl("", [Validators.required, Validators.pattern(/^[0-9]{0,10}(\,[0-9]{1,2})?$/)]),
+      value: new FormControl("", [Validators.required, ValidatorsForm.isMoney()]),
+      // value: new FormControl("", [Validators.required, Validators.pattern(/^[0-9]{0,10}(\,[0-9]{0,2})?$/)]),
       category: new FormControl("", [Validators.required])
     });
   }
 
   ngOnInit() {
     this.filteredOptions = this._filterInit();
+    // this.onlyNumber();
+  }
+
+  onlyNumber(){
+    this.productForm.controls['value'].valueChanges.subscribe((data)=>{
+      const valid = /^[0-9]{0,10}(\,[0-9]{0,2})?$/;
+      if(!valid.test(data))
+        this.productForm.controls['value'].setValue(data.replace(/\D/g,""));
+    })
   }
 
   private _filterInit() :Observable<Category[]> {

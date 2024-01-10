@@ -9,10 +9,8 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 export class CategoryFormComponent {
   constructor(
     private dialogRef: MatDialogRef<any>,
-    @Inject(MAT_DIALOG_DATA) public data: string,
-  ) {
-    this.data = "1"
-  }
+    @Inject(MAT_DIALOG_DATA) public data: any,
+  ) { }
 
   onNoClick(): void {
     this.dialogRef.close();
