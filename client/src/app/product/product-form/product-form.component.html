@@ -29,7 +29,7 @@
     
         <mat-form-field appearance="outline" class="value">
             <mat-label>Valor</mat-label>
-            <input matInput placeholder="0,00" formControlName="value">
+            <input matInput (keyup)="onlyNumber()" placeholder="0,00" formControlName="value">
             <span matTextPrefix>R$&nbsp;</span>
             <mat-icon matSuffix>attach_money</mat-icon>
             <mat-error>{{ errorMessage.getMessage(productForm.controls['value']) }}</mat-error>

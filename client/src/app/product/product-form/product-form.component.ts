@@ -13,40 +13,40 @@ import { ErrorMessageService } from 'src/app/shared/service/error-message.servic
   styleUrls: ['./product-form.component.scss']
 })
 
-export class ProductFormComponent implements OnInit{
+export class ProductFormComponent implements OnInit {
 
   productForm: FormGroup;
-  options: Category[] = [{name: 'fruta', id: 1, active: true}, {name: 'verdura', id: 2, active: true}, {name: 'refrigerante', id:3 , active: true}];
+  options: Category[] = [{ name: 'fruta', id: 1, active: true }, { name: 'verdura', id: 2, active: true }, { name: 'refrigerante', id: 3, active: true }];
   filteredOptions?: Observable<Category[]>;
   isNew = true;
 
   constructor(
     public dialog: MatDialog,
     public errorMessage: ErrorMessageService
-  ){
+  ) {
     this.productForm = new FormGroup({
       name: new FormControl("", [Validators.required]),
       description: new FormControl("", [Validators.required]),
       value: new FormControl("", [Validators.required, ValidatorsForm.isMoney()]),
-      // value: new FormControl("", [Validators.required, Validators.pattern(/^[0-9]{0,10}(\,[0-9]{0,2})?$/)]),
       category: new FormControl("", [Validators.required])
     });
   }
 
   ngOnInit() {
     this.filteredOptions = this._filterInit();
-    // this.onlyNumber();
   }
 
-  onlyNumber(){
-    this.productForm.controls['value'].valueChanges.subscribe((data)=>{
-      const valid = /^[0-9]{0,10}(\,[0-9]{0,2})?$/;
-      if(!valid.test(data))
-        this.productForm.controls['value'].setValue(data.replace(/\D/g,""));
-    })
+  onlyNumber() {
+    const control = this.productForm.controls['value'];
+    control.setValue(
+      control.value.replace(/\D/g,
+        function (match : string) {
+          return match === "," ? match : "";
+        })
+    );
   }
 
-  private _filterInit() :Observable<Category[]> {
+  private _filterInit(): Observable<Category[]> {
     return this.productForm.controls['category'].valueChanges.pipe(
       startWith(''),
       map(value => {
@@ -59,18 +59,15 @@ export class ProductFormComponent implements OnInit{
   private _filter(name: string): Category[] {
     const filterValue = name.toLowerCase();
     return this.options.filter(option => option.name.toLowerCase().includes(filterValue));
-    
   }
 
   displayFn(category: Category): string {
     return category && category.name ? category.name : '';
   }
 
-
-
-  openDialogCategory(){
-    const dialog = this.dialog.open(CategoryFormComponent, { width: 'auto'});
-    dialog.afterClosed().subscribe((result) =>{
+  openDialogCategory() {
+    const dialog = this.dialog.open(CategoryFormComponent, { width: 'auto' });
+    dialog.afterClosed().subscribe((result) => {
       alert(result)
     });
   }
