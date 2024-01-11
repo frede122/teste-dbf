@@ -11,16 +11,11 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ProductModule } from './product/product.module';
 import { MenuComponent } from './menu/menu.component';
-import { MatDialogRef } from '@angular/material/dialog';
-import { ProductListComponent } from './product/product-list/product-list.component';
-import { ProductFormComponent } from './product/product-form/product-form.component';
-import { CategoryListComponent } from './product/category/category-list/category-list.component';
-import { CategoryFormComponent } from './product/category/category-form/category-form.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    MenuComponent
+    MenuComponent,
   ],
   imports: [
     BrowserModule,

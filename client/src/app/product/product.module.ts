@@ -6,12 +6,18 @@ import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatButtonModule } from '@angular/material/button';
-import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatTableModule } from '@angular/material/table'; 
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatSortModule } from '@angular/material/sort';
+import { MatMenuModule } from '@angular/material/menu'; 
+import { MatSnackBarModule }  from '@angular/material/snack-bar';
 
 import { ProductFormComponent } from './product-form/product-form.component';
 import { ProductListComponent } from './product-list/product-list.component';
 import { CategoryListComponent } from './category/category-list/category-list.component';
 import { CategoryFormComponent } from './category/category-form/category-form.component';
+import { SharedModule } from '../shared/shared.module';
 
 
 
@@ -29,6 +35,14 @@ import { CategoryFormComponent } from './category/category-form/category-form.co
     MatAutocompleteModule,
     MatButtonModule,
     MatDialogModule,
+    MatFormFieldModule, 
+    MatInputModule, 
+    MatTableModule, 
+    MatSortModule, 
+    MatPaginatorModule,
+    MatMenuModule,
+    MatSnackBarModule,
+    SharedModule,
     FormsModule,
     ReactiveFormsModule,
     CommonModule,

@@ -1,8 +1,21 @@
 h3 {
     text-align: center;
+    width: 100%;
     margin-top: 10px;
     font-weight: 500;
+    font-size: 1.9em;
+    margin: 30px;
+    color: rgb(31, 31, 88);
 }
+header {
+    width: 100%;
+    position: relative;
+    display: flex;
+}
+// .close {
+//     position: absolute;
+
+// }
 form {
     display: flex;
     flex-wrap: wrap;
@@ -11,18 +24,22 @@ form {
 }
 
 mat-form-field {
-    margin: 10px;
+    margin: 5px 20px;
     width: 30%;
 }
 
 .product {
-    width: calc(65% - 20px);
-    max-width: 600px;
+    width: calc(100% - 40px);
+    max-width: 900px;
 }
 
 .category {
-    width: calc(35% - 20px);
-    max-width: 300px;
+    width: calc(55% - 40px);
+    max-width: 500px;
+}
+.value {
+    width: calc(45% - 40px);
+    max-width: 400px;
 }
 
 .description {

@@ -1,7 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Product } from './../../models/product/product.model';
+import { Component, Inject, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Observable, map, startWith } from 'rxjs';
-import { MatDialog } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { CategoryFormComponent } from '../category/category-form/category-form.component';
 import { Category } from 'src/app/models/product/category.model';
 import { ValidatorsForm } from 'src/app/helpers/validators-form';
@@ -22,7 +24,10 @@ export class ProductFormComponent implements OnInit {
 
   constructor(
     public dialog: MatDialog,
-    public errorMessage: ErrorMessageService
+    public errorMessage: ErrorMessageService,
+    private dialogRef: MatDialogRef<ProductFormComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: Product,
+    private _snackBar: MatSnackBar
   ) {
     this.productForm = new FormGroup({
       name: new FormControl("", [Validators.required]),
@@ -30,17 +35,28 @@ export class ProductFormComponent implements OnInit {
       value: new FormControl("", [Validators.required, ValidatorsForm.isMoney()]),
       category: new FormControl("", [Validators.required])
     });
+
+    
+  }
+
+
+  cancelClick(): void {
+    this.dialogRef.close();
   }
 
   ngOnInit() {
     this.filteredOptions = this._filterInit();
+    if(this.data){
+      this.productForm.patchValue(this.data)
+      this.isNew = false;
+    }
   }
 
   onlyNumber() {
     const control = this.productForm.controls['value'];
     control.setValue(
       control.value.replace(/\D/g,
-        function (match : string) {
+        function (match: string) {
           return match === "," ? match : "";
         })
     );
@@ -65,11 +81,35 @@ export class ProductFormComponent implements OnInit {
     return category && category.name ? category.name : '';
   }
 
-  openDialogCategory() {
+  openCategoryForm() {
     const dialog = this.dialog.open(CategoryFormComponent, { width: 'auto' });
     dialog.afterClosed().subscribe((result) => {
-      alert(result)
+
     });
+  }
+  openSnackBar(message: string) {
+    this._snackBar.open(message, 'Fechar', {
+      duration: 3000
+    });
+  }
+
+  close() {
+    this.dialogRef.close();
+  }
+
+  onSubmit(){
+    if (this.productForm.valid) {
+      let product : Product ={
+        id: 1,
+        name: this.productForm.value.name,
+        description: this.productForm.value.description,
+        category: this.productForm.value.category.name,
+        value: this.productForm.value.value
+      }
+      this.dialogRef.close(product);
+    } else {
+      this.openSnackBar("campos invalidos!")
+    }
   }
 
 }

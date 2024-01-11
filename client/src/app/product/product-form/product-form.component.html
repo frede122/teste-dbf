@@ -1,12 +1,17 @@
 <div class="container">
-    <h3>{{isNew? "Cadastro de Produto" : "Alterar Produto"}}</h3>
-    <form [formGroup]="productForm" class="form">
+    <header>
+        <h3>{{isNew? "Cadastro de Produto" : "Alterar Produto"}}</h3>
+        <button mat-icon-button (click)="close()">
+            <mat-icon>close</mat-icon>
+        </button>
+    </header>
+    <form [formGroup]="productForm" class="form" (ngSubmit)="onSubmit()">
         <mat-form-field appearance="outline" class="product">
             <mat-label>Nome</mat-label>
             <input matInput placeholder="Nome do Produto" formControlName="name">
             <mat-error>{{ errorMessage.getMessage(productForm.controls['name']) }}</mat-error>
         </mat-form-field>
-    
+
         <mat-form-field appearance="outline" class="category">
             <mat-label>Categoria</mat-label>
             <input type="text" matInput formControlName="category" #cat [matAutocomplete]="auto">
@@ -14,19 +19,13 @@
                 <mat-option *ngFor="let option of filteredOptions | async" [value]="option">{{option.name}}</mat-option>
                 <mat-option *ngIf="(filteredOptions | async)?.length === 0">
                     <div class="subtitle">Nenhum resultado encontrado para : <strong> {{ cat.value }} </strong></div>
-                    <div class="open-form"><a (click)="openDialogCategory()">Adicionar em uma nova categoria</a></div>
+                    <div class="open-form"><a (click)="openCategoryForm()">Adicionar em uma nova categoria</a></div>
                 </mat-option>
             </mat-autocomplete>
             <mat-icon matSuffix>arrow_drop_down</mat-icon>
             <mat-error>{{ errorMessage.getMessage(productForm.controls['category']) }}</mat-error>
         </mat-form-field>
-    
-        <mat-form-field appearance="outline" class="description">
-            <mat-label>Descrição</mat-label>
-            <textarea matInput placeholder="Descrição ..." formControlName="description"></textarea>
-            <mat-error>{{ errorMessage.getMessage(productForm.controls['description']) }}</mat-error>
-        </mat-form-field>
-    
+
         <mat-form-field appearance="outline" class="value">
             <mat-label>Valor</mat-label>
             <input matInput (keyup)="onlyNumber()" placeholder="0,00" formControlName="value">
@@ -34,11 +33,18 @@
             <mat-icon matSuffix>attach_money</mat-icon>
             <mat-error>{{ errorMessage.getMessage(productForm.controls['value']) }}</mat-error>
         </mat-form-field>
+
+        <mat-form-field appearance="outline" class="description">
+            <mat-label>Descrição</mat-label>
+            <textarea matInput placeholder="Descrição ..." formControlName="description"></textarea>
+            <mat-error>{{ errorMessage.getMessage(productForm.controls['description']) }}</mat-error>
+        </mat-form-field>
+
         <div class="action">
-            <button mat-raised-button color="primary">{{isNew ? "Salvar" : "Alterar"}}</button>
-            <button mat-raised-button color="cancel">{{isNew ? "Limpar" : "Cancelar"}}</button>
+            <button type="submit" mat-raised-button color="primary">{{isNew ? "Salvar" : "Alterar"}}</button>
+            <button type="reset" mat-raised-button color="cancel">Limpar</button>
         </div>
-    
+
     </form>
 
 </div>
