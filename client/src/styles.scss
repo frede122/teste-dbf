@@ -7,11 +7,21 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
     --default-color-text-menu: rgb(31, 44, 93);
 }
 
-.mat-cancel {
+.mat-green {
+    transition: 1s !important;
     color: white !important;
-    background-color: rgb(128, 0, 19) !important;
+    background-color: green !important;
+}
+.mat-green:hover {
+    color: white !important;
+    background-color: rgba(2, 145, 2, 0.829) !important;
+}
+.mat-cancel {
+    transition: 1s !important;
+    color: white !important;
+    background-color: rgb(185, 52, 52) !important;
 }
 .mat-cancel:hover {
     color: white !important;
-    background-color: rgb(153, 12, 33) !important;
+    background-color: rgba(199, 87, 87, 0.829) !important;
 }
