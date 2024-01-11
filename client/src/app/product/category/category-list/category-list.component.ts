@@ -41,11 +41,30 @@ export class CategoryListComponent implements AfterViewInit {
     }
   }
 
-  openCategoryForm() {
-    const dialog = this.dialog.open(CategoryFormComponent, { width: 'auto' });
-    dialog.afterClosed().subscribe((result) => {
+
+  newReg() {
+    const dialog = this.dialog.open(CategoryFormComponent, { maxWidth: "450px" });
+    dialog.afterClosed().subscribe((result : Category) => {
+      if(result){
+        let categorys: Category[] = [...DATA, result]
+        this.dataSource.data = categorys;
+      }
     });
   }
+
+  edit(product: Category) {
+    const dialog = this.dialog.open(CategoryFormComponent, { 
+      maxWidth: "650px",
+      data: product
+    });
+    dialog.afterClosed().subscribe((result : Category) => {
+      if(result){
+        let categorys: Category[] = [...DATA, result]
+        this.dataSource.data = categorys;
+      }
+    });
+  }
+
 
   openConfirmDelete(category: Category) {
     const dialog = this.dialog.open(ConfirmDialogComponent, {

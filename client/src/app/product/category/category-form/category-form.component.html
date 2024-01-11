@@ -1,1 +1,21 @@
-<p>category-form works!</p>
+<div class="container">
+    <header>
+        <h3>{{isNew? "Cadastro de Categoria" : "Alterar Categoria"}}</h3>
+        <button mat-icon-button (click)="close()">
+            <mat-icon>close</mat-icon>
+        </button>
+    </header>
+    <form [formGroup]="categoryForm" class="form" (ngSubmit)="onSubmit()">
+        <mat-form-field appearance="outline" class="category">
+            <mat-label>Nome</mat-label>
+            <input matInput placeholder="Nome da Categoria" formControlName="name">
+            <mat-error>{{ errorMessage.getMessage(categoryForm.controls['name']) }}</mat-error>
+        </mat-form-field>
+
+        <div class="action">
+            <button type="submit" mat-raised-button color="primary">{{isNew ? "Salvar" : "Alterar"}}</button>
+            <button type="reset" mat-raised-button color="cancel">Limpar</button>
+        </div>
+    </form>
+
+</div>

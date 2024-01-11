@@ -20,14 +20,14 @@ export class ProductFormComponent implements OnInit {
   productForm: FormGroup;
   options: Category[] = [{ name: 'fruta', id: 1, active: true }, { name: 'verdura', id: 2, active: true }, { name: 'refrigerante', id: 3, active: true }];
   filteredOptions?: Observable<Category[]>;
-  isNew = true;
+  isNew: boolean = true;
 
   constructor(
     public dialog: MatDialog,
     public errorMessage: ErrorMessageService,
     private dialogRef: MatDialogRef<ProductFormComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: Product,
-    private _snackBar: MatSnackBar
+    private _snackBar: MatSnackBar,
+    @Inject(MAT_DIALOG_DATA) public data: Product
   ) {
     this.productForm = new FormGroup({
       name: new FormControl("", [Validators.required]),
@@ -36,20 +36,18 @@ export class ProductFormComponent implements OnInit {
       category: new FormControl("", [Validators.required])
     });
 
-    
+
   }
 
-
-  cancelClick(): void {
-    this.dialogRef.close();
-  }
 
   ngOnInit() {
     this.filteredOptions = this._filterInit();
-    if(this.data){
+
+    if (this.data) {
       this.productForm.patchValue(this.data)
       this.isNew = false;
     }
+
   }
 
   onlyNumber() {
@@ -97,9 +95,9 @@ export class ProductFormComponent implements OnInit {
     this.dialogRef.close();
   }
 
-  onSubmit(){
+  onSubmit() {
     if (this.productForm.valid) {
-      let product : Product ={
+      let product: Product = {
         id: 1,
         name: this.productForm.value.name,
         description: this.productForm.value.description,
