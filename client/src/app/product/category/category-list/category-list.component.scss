@@ -1,0 +1,88 @@
+.delete,
+.edit {
+    margin-right: 25px;
+}
+
+.delete mat-icon {
+    color: rgba(185, 34, 34, 0.5);
+}
+
+.edit mat-icon {
+    color: rgb(32, 32, 193, 0.5);
+}
+
+[mat-header-cell],
+[mat-cell] {
+    width: auto;
+    padding-right: 8px;
+}
+
+.container {
+    margin: 20px;
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+table, .search {
+    width: 100%;
+    max-width: 80%;
+    min-width: 1024px;
+}
+
+#list-category {
+    position: relative;
+    margin-top: 30px;
+}
+
+.button-add {
+    position: absolute;
+    top: -35px;
+    right: -35px;
+}
+
+.button-add::after {
+    position: absolute;
+    content: 'Adicionar novo';
+    width: 120px;
+    height: 40px;
+    background-color: #3f51b562;
+    border-radius: 5px;
+    top: 8px;
+    left: -133px;
+    text-align: center;
+    line-height: 37px;
+    transition: .5s;
+}
+
+.button-add::before {
+    position: absolute;
+    border-radius: 0;
+    width: 0; 
+    height: 0; 
+    border-top: 10px solid transparent;
+    border-bottom: 10px solid transparent;
+    border-left: 10px solid  #3f51b562;
+    top: 18px;
+    left: -13px;
+    transition: .5s;
+}
+
+.button-add:hover::after {
+    background-color: #3f51b5;
+}
+
+.button-add:hover::before {
+    border-left: 10px solid  #3f51b5;
+}
+
+.mat-mdc-form-field {
+    font-size: 14px;
+    width: 100%;
+}
+
+td,
+th {
+    width: 25%;
+}
