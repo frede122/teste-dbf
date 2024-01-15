@@ -3,12 +3,15 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { RouterModule } from '@nestjs/core';
+import { ProductsModule } from './products/products.module';
+import { Category } from './products/category/entity/category.entity';
 
 const ROUTER = [
-  // { path: 'products', module: ProductsModule }
+  { path: 'products', module: ProductsModule }
 ]
 
 const ENTITY = [
+  Category
 ]
 
 @Module({
@@ -24,6 +27,7 @@ const ENTITY = [
       synchronize: true,
     }),
     RouterModule.register(ROUTER),
+    ProductsModule
   ],
   controllers: [AppController],
   providers: [AppService],
