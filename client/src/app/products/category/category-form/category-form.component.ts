@@ -2,7 +2,8 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { Category } from 'src/app/models/product/category.model';
+import { Category } from 'src/app/models/products/category.model';
+import { CategoryService } from 'src/app/services/products/category.service';
 import { ErrorMessageService } from 'src/app/shared/service/error-message.service';
 
 @Component({
@@ -19,7 +20,8 @@ export class CategoryFormComponent implements OnInit {
     public errorMessage: ErrorMessageService,
     private dialogRef: MatDialogRef<CategoryFormComponent>,
     private _snackBar: MatSnackBar,
-    @Inject(MAT_DIALOG_DATA) public data: any,
+    private categoryService: CategoryService,
+    @Inject(MAT_DIALOG_DATA) public data: Category,
   ) { 
     this.categoryForm = new FormGroup({
       name: new FormControl("", [Validators.required]),
@@ -50,11 +52,9 @@ export class CategoryFormComponent implements OnInit {
 
   onSubmit() {
     if (this.categoryForm.valid) {
-      let product: Category = {
-        id: 1,
-        name: this.categoryForm.value.name
-      }
-      this.dialogRef.close(product);
+      let data: Category = this.isNew ? new Category("") : this.data
+      data.name = this.categoryForm.value.name;
+        this.dialogRef.close(data);
     } else {
       this.openSnackBar("campos invalidos!")
     }

@@ -5,10 +5,10 @@
     </mat-form-field>
 
     <div id="list-category" class="mat-elevation-z6">
-        <button (click)="newReg()" mat-fab class="button-add" color="primary" >
+        <button (click)="create()" mat-fab class="button-add" color="primary" >
             <mat-icon>add</mat-icon>
         </button>
-        <table mat-table [dataSource]="dataSource" matSort>
+        <table mat-table [dataSource]="dataSource ? dataSource : []" matSort>
 
             <!-- ID Column -->
             <ng-container matColumnDef="id" class="id">

@@ -1,4 +1,5 @@
 import { NgModule } from '@angular/core';
+import { HttpClientModule } from '@angular/common/http';
 import { CommonModule, AsyncPipe } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatIconModule } from '@angular/material/icon';
@@ -13,8 +14,8 @@ import { MatSortModule } from '@angular/material/sort';
 import { MatMenuModule } from '@angular/material/menu'; 
 import { MatSnackBarModule }  from '@angular/material/snack-bar';
 
-import { ProductFormComponent } from './product-form/product-form.component';
-import { ProductListComponent } from './product-list/product-list.component';
+import { ProductFormComponent } from './product/product-form/product-form.component';
+import { ProductListComponent } from './product/product-list/product-list.component';
 import { CategoryListComponent } from './category/category-list/category-list.component';
 import { CategoryFormComponent } from './category/category-form/category-form.component';
 import { SharedModule } from '../shared/shared.module';
@@ -29,6 +30,7 @@ import { SharedModule } from '../shared/shared.module';
     CategoryFormComponent
   ],
   imports: [
+    HttpClientModule,
     MatIconModule,
     MatInputModule,
     MatFormFieldModule,
