@@ -1,11 +1,10 @@
 import { AbstractEntity } from "src/base/abstract.entity";
 import { Column, Entity } from "typeorm";
 
-@Entity()
+@Entity('categories')
 export class Category extends AbstractEntity {
 
     @Column({
-        unique: true,
         nullable: false,
     })
     name: string

@@ -5,13 +5,16 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { RouterModule } from '@nestjs/core';
 import { ProductsModule } from './products/products.module';
 import { Category } from './products/category/entity/category.entity';
+import { Product } from './products/product/entity/product.entity';
 
 const ROUTER = [
   { path: 'products', module: ProductsModule }
 ]
 
 const ENTITY = [
-  Category
+  Category,
+
+  Product
 ]
 
 @Module({
@@ -24,7 +27,7 @@ const ENTITY = [
       password: '',
       database: 'teste-dbf',
       entities: ENTITY,
-      synchronize: true,
+      synchronize: false,
     }),
     RouterModule.register(ROUTER),
     ProductsModule
@@ -32,4 +35,7 @@ const ENTITY = [
   controllers: [AppController],
   providers: [AppService],
 })
-export class AppModule {}
+export class AppModule {
+
+
+}
