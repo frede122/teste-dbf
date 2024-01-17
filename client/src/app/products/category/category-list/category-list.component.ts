@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
@@ -14,7 +14,7 @@ import { CategoryService } from 'src/app/services/products/category.service';
   templateUrl: './category-list.component.html',
   styleUrls: ['./category-list.component.scss']
 })
-export class CategoryListComponent implements AfterViewInit {
+export class CategoryListComponent implements AfterViewInit, OnInit {
   displayedColumns: string[] = ['id', 'name', 'action'];
   dataSource: MatTableDataSource<Category>;
 
@@ -26,17 +26,13 @@ export class CategoryListComponent implements AfterViewInit {
     private categoryService: CategoryService
   ) {
     this.dataSource = new MatTableDataSource<Category>();
+  }
+
+  ngOnInit(): void {
     this.load();
   }
 
-  load() {
-    this.categoryService.getAll().subscribe((data: Category[]) => {
-      this.dataSource = new MatTableDataSource<Category>(data)
-    })
-  }
-
   ngAfterViewInit() {
-
       this.dataSource.paginator = this.paginator || null;
       this.dataSource.sort = this.sort || null;
   }
@@ -51,33 +47,52 @@ export class CategoryListComponent implements AfterViewInit {
       }
   }
 
+  load() {
+    this.categoryService.getAll().subscribe((data: Category[]) => {
+      this.dataSource = new MatTableDataSource<Category>(data)
+    })
+  }
 
   create() {
     const dialog = this.dialog.open(CategoryFormComponent, { maxWidth: "450px" });
-    dialog.afterClosed().subscribe((result: Category) => {
-      if (result) {
-        this.categoryService.create(result).subscribe(()=>{
-          this.load();
-        });
-      }
+    dialog.afterClosed().subscribe((result) => {
+      if (result)
+        this.load()
     });
   }
 
   edit(category: Category) {
-    const dialog = this.dialog.open(CategoryFormComponent, {
+    const dialog = this.dialog.open(CategoryFormComponent, { 
       maxWidth: "650px",
       data: category
     });
-
-    dialog.afterClosed().subscribe((result: Category) => {
-      if (result) {
-        this.categoryService.update(result.id, result).subscribe(()=>{
-          this.load();
-        });
-      }
-    });
   }
 
+  // create() {
+  //   const dialog = this.dialog.open(CategoryFormComponent, { maxWidth: "450px" });
+  //   dialog.afterClosed().subscribe((result: Category) => {
+  //     if (result) {
+  //       this.categoryService.create(result).subscribe(()=>{
+  //         this.load();
+  //       });
+  //     }
+  //   });
+  // }
+
+  // edit(category: Category) {
+  //   const dialog = this.dialog.open(CategoryFormComponent, {
+  //     maxWidth: "650px",
+  //     data: category
+  //   });
+
+  //   dialog.afterClosed().subscribe((result: Category) => {
+  //     if (result) {
+  //       this.categoryService.update(result.id, result).subscribe(()=>{
+  //         this.load();
+  //       });
+  //     }
+  //   });
+  // }
 
   openConfirmDelete(category: Category) {
     const dialog = this.dialog.open(ConfirmDialogComponent, {
@@ -100,13 +115,3 @@ export class CategoryListComponent implements AfterViewInit {
   }
 
 }
-
-
-const DATA: Category[] = [
-  { id: 1, name: "fruta" },
-  { id: 2, name: "verdura" },
-  { id: 3, name: "leguminosaleguminosaleguminosalegosaleguminosa" },
-  { id: 4, name: "benificiados" },
-  { id: 5, name: "enlatados" },
-  { id: 6, name: "doces" }
-];

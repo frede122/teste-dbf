@@ -22,7 +22,7 @@ export class CategoryFormComponent implements OnInit {
     private _snackBar: MatSnackBar,
     private categoryService: CategoryService,
     @Inject(MAT_DIALOG_DATA) public data: Category,
-  ) { 
+  ) {
     this.categoryForm = new FormGroup({
       name: new FormControl("", [Validators.required]),
     });
@@ -54,9 +54,24 @@ export class CategoryFormComponent implements OnInit {
     if (this.categoryForm.valid) {
       let data: Category = this.isNew ? new Category("") : this.data
       data.name = this.categoryForm.value.name;
-        this.dialogRef.close(data);
+      // this.dialogRef.close(data);
+      this.isNew ? this.create(data) : this.update(data.id, data);
     } else {
       this.openSnackBar("campos invalidos!")
     }
   }
+
+  create(category: Category) {
+    this.categoryService.create(category).subscribe((data) => {
+      this.openSnackBar("salvo com sucesso!");
+      this.dialogRef.close(data);
+    })
+  }
+  update(id: number, category: Category) {
+    this.categoryService.update(id, category).subscribe((data) => {
+      this.openSnackBar("salvo com sucesso!");
+      this.dialogRef.close(data);
+    })
+  }
+
 }
