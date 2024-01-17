@@ -1,13 +1,15 @@
-import { Product } from './../../models/product/product.model';
+import { Product } from './../../../models/products/product.model';
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Observable, map, startWith } from 'rxjs';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dialog';
-import { CategoryFormComponent } from '../category/category-form/category-form.component';
-import { Category } from 'src/app/models/product/category.model';
+import { CategoryFormComponent } from '../../category/category-form/category-form.component';
+import { Category } from 'src/app/models/products/category.model';
 import { ValidatorsForm } from 'src/app/helpers/validators-form';
 import { ErrorMessageService } from 'src/app/shared/service/error-message.service';
+import { CategoryService } from 'src/app/services/products/category.service';
+import { ProductService } from 'src/app/services/products/product.service';
 
 @Component({
   selector: 'app-product-form',
@@ -18,11 +20,13 @@ import { ErrorMessageService } from 'src/app/shared/service/error-message.servic
 export class ProductFormComponent implements OnInit {
 
   productForm: FormGroup;
-  options: Category[] = [{ name: 'fruta', id: 1, active: true }, { name: 'verdura', id: 2, active: true }, { name: 'refrigerante', id: 3, active: true }];
+  options: Category[] = [];
   filteredOptions?: Observable<Category[]>;
   isNew: boolean = true;
 
   constructor(
+    private categoryService: CategoryService,
+    private productService: ProductService,
     public dialog: MatDialog,
     public errorMessage: ErrorMessageService,
     private dialogRef: MatDialogRef<ProductFormComponent>,
@@ -35,19 +39,24 @@ export class ProductFormComponent implements OnInit {
       value: new FormControl("", [Validators.required, ValidatorsForm.isMoney()]),
       category: new FormControl("", [Validators.required])
     });
-
-
+    
   }
-
-
+  
+  
   ngOnInit() {
-    this.filteredOptions = this._filterInit();
-
+    this.loadCategory();
     if (this.data) {
       this.productForm.patchValue(this.data)
       this.isNew = false;
     }
 
+  }
+
+  loadCategory(){
+    this.categoryService.getAll().subscribe((data: Category[]) =>{
+      this.options = data;
+      this.filteredOptions = this._filterInit();
+    })
   }
 
   onlyNumber() {
@@ -82,7 +91,7 @@ export class ProductFormComponent implements OnInit {
   openCategoryForm() {
     const dialog = this.dialog.open(CategoryFormComponent, { width: 'auto' });
     dialog.afterClosed().subscribe((result) => {
-
+      this.loadCategory();
     });
   }
   openSnackBar(message: string) {
@@ -97,17 +106,29 @@ export class ProductFormComponent implements OnInit {
 
   onSubmit() {
     if (this.productForm.valid) {
-      let product: Product = {
-        id: 1,
-        name: this.productForm.value.name,
-        description: this.productForm.value.description,
-        category: this.productForm.value.category.name,
-        value: this.productForm.value.value
-      }
-      this.dialogRef.close(product);
+      let data: Product = this.isNew ? new Product("","",new Category(""),0) : this.data;
+      data.name = this.productForm.value.name;
+      data.description = this.productForm.value.description;
+      data.value = this.productForm.value.value;
+      data.category = this.productForm.value.category;
+      this.isNew ? this.create(data) : this.update(data.id, data);
     } else {
       this.openSnackBar("campos invalidos!")
     }
+  }
+
+  create(product: Product){
+    console.log(product)
+    this.productService.create(product).subscribe((data)=>{
+      this.openSnackBar("salvo com sucesso!");
+      this.dialogRef.close(data);
+    })
+  }
+  update(id: number, product: Product){
+    this.productService.update(id, product).subscribe((data)=>{
+      this.openSnackBar("salvo com sucesso!");
+      this.dialogRef.close(data);
+    })
   }
 
 }

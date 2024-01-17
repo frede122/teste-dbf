@@ -1,20 +1,21 @@
-import { AfterViewInit, Component, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatDialog } from '@angular/material/dialog';
-import {MatSnackBar} from '@angular/material/snack-bar';
 
-import { Product } from 'src/app/models/product/product.model';
+import { Product } from 'src/app/models/products/product.model';
 import { ProductFormComponent } from '../product-form/product-form.component';
 import { ConfirmDialogComponent } from 'src/app/shared/components/confirm-dialog/confirm-dialog.component';
+import { ProductService } from 'src/app/services/products/product.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-product-list',
   templateUrl: './product-list.component.html',
   styleUrls: ['./product-list.component.scss']
 })
-export class ProductListComponent implements AfterViewInit {
+export class ProductListComponent implements AfterViewInit, OnInit{
   displayedColumns: string[] = ['id', 'name', 'category', 'description', 'value', 'action'];
   dataSource: MatTableDataSource<Product>;
 
@@ -24,10 +25,15 @@ export class ProductListComponent implements AfterViewInit {
 
   constructor(
     public dialog: MatDialog,
+    private prodcutService: ProductService,
+    private _snackBar: MatSnackBar,
   ) {
-    this.dataSource = new MatTableDataSource(DATA);
+    this.dataSource = new MatTableDataSource<Product>();
   }
 
+  ngOnInit(): void {
+    this.load();
+  }
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator || null;
     this.dataSource.sort = this.sort || null;
@@ -43,13 +49,23 @@ export class ProductListComponent implements AfterViewInit {
     }
   }
 
-  newReg() {
+  load(){
+    this.prodcutService.getAll().subscribe((data: Product[]) => {
+      this.dataSource = new MatTableDataSource<Product>(data)
+    })
+  }
+
+  openSnackBar(message: string) {
+    this._snackBar.open(message, 'Fechar', {
+      duration: 3000
+    });
+  }
+
+  create() {
     const dialog = this.dialog.open(ProductFormComponent, { maxWidth: "650px" });
-    dialog.afterClosed().subscribe((result : Product) => {
-      if(result){
-        let products: Product[] = [...DATA, result]
-        this.dataSource.data = products;
-      }
+    dialog.afterClosed().subscribe((result) => {
+      if (result)
+        this.load()
     });
   }
 
@@ -57,12 +73,6 @@ export class ProductListComponent implements AfterViewInit {
     const dialog = this.dialog.open(ProductFormComponent, { 
       maxWidth: "650px",
       data: product
-    });
-    dialog.afterClosed().subscribe((result : Product) => {
-      if(result){
-        let products: Product[] = [...DATA, result]
-        this.dataSource.data = products;
-      }
     });
   }
 
@@ -77,26 +87,17 @@ export class ProductListComponent implements AfterViewInit {
     });
     dialog.afterClosed().subscribe((result) => {
       if (result)
-        this.delete(product);
+        this.delete(product.id);
     });
   }
 
-  delete(product: Product){
-    let data = this.dataSource.data;
-    data.splice(data.indexOf(product), 1);
-    this.dataSource.data = data;
+  delete(id: number) {
+    this.prodcutService.delete(id).subscribe(()=>{
+      this.openSnackBar("Produto deletado com sucesso!");
+      this.load();
+    });
   }
 
 }
 
 
-const DATA: Product[] = [
-  { id: 1, name: 'maça', value: 1.00, description: "descricao A", category: "fruta" },
-  { id: 2, name: 'pera', value: 4.06, description: "descricao B", category: "fruta" },
-  { id: 3, name: 'melancia', value: 6.94, description: "descricao C", category: "fruta" },
-  { id: 4, name: 'mamão', value: 9.22, description: "descricao D", category: "fruta" },
-  { id: 5, name: 'uva', value: 10.81, description: "descricao F", category: "fruta" },
-  { id: 6, name: 'jabuticaba', value: 12.07, description: "descricao G", category: "fruta" },
-  { id: 7, name: 'goiaba', value: 14.67, description: "descricao H", category: "fruta" },
-  
-];
