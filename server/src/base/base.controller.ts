@@ -2,6 +2,7 @@ import { Body, Delete, Get, Param, ParseIntPipe, Patch, Post, Put } from "@nestj
 import { Repository } from "typeorm";
 import { AbstractEntity } from "./abstract.entity";
 import { json } from "stream/consumers";
+import { BaseServiceInterface } from "./base.service.interface";
 
 
 export abstract class BaseController<typeEntity extends AbstractEntity> {
