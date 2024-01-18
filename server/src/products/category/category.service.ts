@@ -13,5 +13,17 @@ export class CategoryService extends BaseService{
       ) {
         super(repository)
       }
+
+      async findAll() {
+        return await this.repository.find({
+          where: {
+            active: true
+          }
+        });
+      }
+
+      async delete(id: number) {
+        return await this.repository.update(id, {active: false});
+      }
     
 }

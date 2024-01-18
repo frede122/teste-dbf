@@ -9,16 +9,16 @@ export abstract class BaseService implements BaseServiceInterface {
     public repository: Repository<AbstractEntity>,
   ) { }
 
-  async create(data: AbstractEntity): Promise<AbstractEntity> {
+   async create(data: AbstractEntity): Promise<AbstractEntity> | null {
     const result = this.repository.create(data);
     return await this.repository.save(result);
   }
 
-  async findAll() {
+  async findAll(): Promise<AbstractEntity[]> | null {
     return await this.repository.find();
   }
 
-  async show(id: number) {
+  async show(id: number): Promise<AbstractEntity> | null {
     return await this.repository.findOne({
       where: {
         id
@@ -26,11 +26,11 @@ export abstract class BaseService implements BaseServiceInterface {
     });
   }
 
-  async update(id: number, data: AbstractEntity) {
+  async update(id: number, data: AbstractEntity): Promise<any> | null {
     return await this.repository.update(id, data);
   }
 
-  async delete(id: number) {
+  async delete(id: number): Promise<any> | null {
     return await this.repository.delete(id);
   }
 

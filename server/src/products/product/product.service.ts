@@ -14,12 +14,12 @@ export class ProductService extends BaseService {
     super(repository)
   }
 
-
-  async findAll() {
-    return await this.repository.find({
-      relations: {
-        category: true,
-      },
-    });
+   async findAll():  Promise<any> | null {
+    return await this.repository.createQueryBuilder("products")
+    .leftJoinAndSelect(
+      'products.category', 
+      'category', 
+      "category.active = true"
+      ).getMany();
   }
 }
