@@ -1,11 +1,8 @@
 import { Body, Delete, Get, Param, ParseIntPipe, Patch, Post, Put } from "@nestjs/common";
-import { Repository } from "typeorm";
-import { AbstractEntity } from "./abstract.entity";
-import { json } from "stream/consumers";
 import { BaseServiceInterface } from "./base.service.interface";
 
 
-export abstract class BaseController<typeEntity extends AbstractEntity> {
+export abstract class BaseController{
 
     public service: BaseServiceInterface;
 
@@ -20,18 +17,18 @@ export abstract class BaseController<typeEntity extends AbstractEntity> {
     }
 
     @Post()
-    async create(@Body() data: typeEntity): Promise<typeEntity> {
+    async create(@Body() data: any) {
         return this.service.create(data);
     }
 
 
     @Put(':id')
-    async update(@Param('id', ParseIntPipe) id: number, @Body() data: typeEntity) {
+    async update(@Param('id', ParseIntPipe) id: number, @Body() data: any) {
         return this.service.update(id, data);
     }
 
     @Patch(':id')
-    async updatePartial(@Param('id', ParseIntPipe) id: number, @Body() data: typeEntity) {
+    async updatePartial(@Param('id', ParseIntPipe) id: number, @Body() data: any) {
         return this.service.update(id, data);
     }
 

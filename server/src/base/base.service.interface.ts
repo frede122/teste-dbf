@@ -1,9 +1,8 @@
-import { AbstractEntity } from "./abstract.entity";
 
 export interface BaseServiceInterface {
-    create(data: AbstractEntity);
+    create(data: any);
     findAll();
     show(id: number);
-    update(id: number, data: AbstractEntity);
+    update(id: number, data: any);
     delete(id: number);
 }

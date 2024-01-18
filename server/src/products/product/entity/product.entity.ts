@@ -11,12 +11,8 @@ export class Product extends AbstractEntity{
     @Column({ nullable: false })
     description: string;
 
-    @Column({ nullable: false })
+    @Column({ nullable: false, type: 'decimal' })
     value: number;
-
-    // @Column({ nullable: false, 
-    // })
-    // category_id: number
 
     @OneToOne(() => Category)
     @JoinColumn({ name: 'category_id' })
