@@ -109,7 +109,7 @@ export class ProductFormComponent implements OnInit {
       let data: Product = this.isNew ? new Product("","",new Category(""),0) : this.data;
       data.name = this.productForm.value.name;
       data.description = this.productForm.value.description;
-      data.value = this.productForm.value.value;
+      data.value = parseFloat(this.productForm.value.value);
       data.category = this.productForm.value.category;
       this.isNew ? this.create(data) : this.update(data.id, data);
     } else {
