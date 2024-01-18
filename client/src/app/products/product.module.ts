@@ -13,6 +13,7 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
 import { MatMenuModule } from '@angular/material/menu'; 
 import { MatSnackBarModule }  from '@angular/material/snack-bar';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 import { ProductFormComponent } from './product/product-form/product-form.component';
 import { ProductListComponent } from './product/product-list/product-list.component';
@@ -44,6 +45,7 @@ import { SharedModule } from '../shared/shared.module';
     MatPaginatorModule,
     MatMenuModule,
     MatSnackBarModule,
+    MatProgressSpinnerModule,
     SharedModule,
     FormsModule,
     ReactiveFormsModule,

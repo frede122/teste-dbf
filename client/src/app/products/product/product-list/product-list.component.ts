@@ -18,7 +18,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 export class ProductListComponent implements AfterViewInit, OnInit{
   displayedColumns: string[] = ['id', 'name', 'category', 'description', 'value', 'action'];
   dataSource: MatTableDataSource<Product>;
-
+  loading: boolean = true;
 
   @ViewChild(MatPaginator) paginator?: MatPaginator;
   @ViewChild(MatSort) sort?: MatSort;
@@ -35,15 +35,14 @@ export class ProductListComponent implements AfterViewInit, OnInit{
     this.load();
   }
   ngAfterViewInit() {
-    this.dataSource.paginator = this.paginator || null;
-    this.dataSource.sort = this.sort || null;
+    this.dataSource.paginator = this.paginator || this.dataSource.paginator;
+    this.dataSource.sort = this.sort || this.dataSource.sort;
     
   }
 
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
-
     if (this.dataSource.paginator) {
       this.dataSource.paginator.firstPage();
     }
@@ -51,7 +50,8 @@ export class ProductListComponent implements AfterViewInit, OnInit{
 
   load(){
     this.prodcutService.getAll().subscribe((data: Product[]) => {
-      this.dataSource = new MatTableDataSource<Product>(data)
+      this.dataSource = new MatTableDataSource<Product>(data);
+      this.loading = false;
     })
   }
 
@@ -64,8 +64,10 @@ export class ProductListComponent implements AfterViewInit, OnInit{
   create() {
     const dialog = this.dialog.open(ProductFormComponent, { maxWidth: "650px" });
     dialog.afterClosed().subscribe((result) => {
-      if (result)
-        this.load()
+      if (result){
+        this.loading = true;
+        this.load();
+      }
     });
   }
 
@@ -93,6 +95,7 @@ export class ProductListComponent implements AfterViewInit, OnInit{
 
   delete(id: number) {
     this.prodcutService.delete(id).subscribe(()=>{
+      this.loading = true;
       this.openSnackBar("Produto deletado com sucesso!");
       this.load();
     });

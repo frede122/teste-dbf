@@ -25,7 +25,8 @@
     justify-content: center;
 }
 
-table, .search {
+table,
+.search {
     width: 100%;
     max-width: 80%;
     min-width: 1024px;
@@ -59,11 +60,11 @@ table, .search {
 .button-add::before {
     position: absolute;
     border-radius: 0;
-    width: 0; 
-    height: 0; 
+    width: 0;
+    height: 0;
     border-top: 10px solid transparent;
     border-bottom: 10px solid transparent;
-    border-left: 10px solid  #3f51b562;
+    border-left: 10px solid #3f51b562;
     top: 18px;
     left: -13px;
     transition: .5s;
@@ -74,7 +75,7 @@ table, .search {
 }
 
 .button-add:hover::before {
-    border-left: 10px solid  #3f51b5;
+    border-left: 10px solid #3f51b5;
 }
 
 .mat-mdc-form-field {
@@ -85,4 +86,13 @@ table, .search {
 td,
 th {
     width: 25%;
+}
+
+.loading {
+    position: absolute;
+    display: flex;
+    width: 100%;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
 }
