@@ -18,7 +18,7 @@
 }
 
 .container {
-    margin: 20px;
+    margin-top: 20px;
     width: 100%;
     display: flex;
     flex-wrap: wrap;
@@ -26,14 +26,19 @@
 }
 
 table, .search {
-    width: 100%;
+    width: 80%;
     max-width: 80%;
-    min-width: 1024px;
 }
+
+.search {
+  min-width: 1024px;
+}
+
 
 #list-product {
     position: relative;
     margin-top: 30px;
+    max-width: 80%;
 }
 
 #list-product .button-add {
@@ -94,4 +99,58 @@ th {
     height: 100%;
     justify-content: center;
     align-items: center;
+}
+
+.action {
+  width: 100%;
+  display: flex;
+  justify-content: end;
+}
+
+// table {
+//   width: 100%;
+// }
+
+tr.detail-row {
+  height: 0;
+}
+
+tr.element-row:not(.expanded-row):hover {
+  background: whitesmoke;
+}
+
+tr.element-row:not(.expanded-row):active {
+  background: #efefef;
+}
+
+.element-row td {
+  border-bottom-width: 0;
+}
+
+.element-detail {
+  overflow: hidden;
+  display: flex;
+}
+
+.element-diagram {
+  min-width: 80px;
+  border: 2px solid black;
+  padding: 8px;
+  font-weight: lighter;
+  margin: 8px 0;
+  height: 104px;
+}
+
+.element-symbol {
+  font-weight: bold;
+  font-size: 40px;
+  line-height: normal;
+}
+
+.element-description {
+  padding: 16px;
+}
+
+.element-description-attribution {
+  opacity: 0.5;
 }

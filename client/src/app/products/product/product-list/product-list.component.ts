@@ -3,6 +3,7 @@ import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatDialog } from '@angular/material/dialog';
+import { animate, state, style, transition, trigger } from '@angular/animations';
 
 import { Product } from 'src/app/models/products/product.model';
 import { ProductFormComponent } from '../product-form/product-form.component';
@@ -13,15 +14,25 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 @Component({
   selector: 'app-product-list',
   templateUrl: './product-list.component.html',
-  styleUrls: ['./product-list.component.scss']
+  styleUrls: ['./product-list.component.scss'],
+  animations: [
+    trigger('detailExpand', [
+      state('collapsed,void', style({height: '0px', minHeight: '0'})),
+      state('expanded', style({height: '*'})),
+      transition('expanded <=> collapsed', animate('225ms cubic-bezier(0.4, 0.0, 0.2, 1)')),
+    ]),
+  ],
 })
 export class ProductListComponent implements AfterViewInit, OnInit{
-  displayedColumns: string[] = ['id', 'name', 'category', 'description', 'value', 'action'];
+
+  displayedColumns: string[] = ['id', 'name', 'category', 'value', 'action'];
+  columnsToDisplayWithExpand = ['expand', ...this.displayedColumns];
   dataSource: MatTableDataSource<Product>;
   loading: boolean = true;
+  expandedElement: Product | null = null;
 
-  @ViewChild(MatPaginator) paginator?: MatPaginator;
-  @ViewChild(MatSort) sort?: MatSort;
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
+  @ViewChild(MatSort) sort!: MatSort;
 
   constructor(
     public dialog: MatDialog,
@@ -102,5 +113,3 @@ export class ProductListComponent implements AfterViewInit, OnInit{
   }
 
 }
-
-
