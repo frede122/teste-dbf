@@ -1,11 +1,11 @@
+As controllers utilizam-se de entidades DTO para validação de seus campos por meio do Class-Validator.
+## Configuração e Instalação
+* [Configuração e Instalação](../server/README.md)
+  
 ## Estrutura e padrão da API
 O projeto esta estruturado em modulo, por exemplo o modulo de produtos possui sua propria pasta, onde contém sua controller, service, arquivos DTOs e Entitys
 
 Cada controller extende da BaseController, herdando seus atributos e metodos. O mesmo que acontece com as controllers ocorre com as services, onde elas extendem da BaseService.
-
-As controllers utilizam-se de entidades DTO para validação de seus campos por meio do Class-Validator.
-## Configuração e Instalação
-* [Configuração e Instalação](../server/README.md)
 
 ### Diagrama da estrutura do projeto
 ```mermaid
@@ -41,7 +41,36 @@ CategoryDTO : string name
 CategoryDTO : boolean active
 ```
 
+## EndPoints
 
+### Produtos
+| Req. Http | Url | Função
+|---| ---| ---|
+| POST | /products/product | create(data)|
+| POST | /products/product/photo | upload(file)|
+| GET | /products/product | index()|
+| GET | /products/product/:id | show(id)|
+| PUT | /products/product/:id | update(id, data)|
+| DELETE | /products/product/:id | delete(id)|
+
+### Categorias
+| Req. Http | Url | Função | Exe: JSON Válido
+|---| ---| ---| ---|
+| POST | /products/category | create(data)| [Create Category ](#create-category) |
+| GET | /products/category | index()|  |
+| GET | /products/category/:id | show(id)| |
+| PUT | /products/category/:id | update(id, data)| |
+| DELETE | /products/category/:id | delete(id)| |
+
+
+### JSON validos para Categoria
+#### create category
+[Create Category]([create-category])
+```json
+{
+    "name": " frutas"
+}
+```
 
 ## Testes Unitários
 Para executar os testes da aplicação entre no terminal, acesse a pasta e digite os seguintes comandos :
