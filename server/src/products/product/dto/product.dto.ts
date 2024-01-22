@@ -1,12 +1,14 @@
 import { Category } from "../../../products/category/entity/category.entity";
-import { IsNumber, IsObject, IsOptional, IsString } from 'class-validator';
+import { IsNumber, IsObject, IsOptional, IsString, MaxLength } from 'class-validator';
 
 export class ProductDTO{
 
+    @MaxLength(100)
     @IsString()
     name: string;
 
     @IsString()    
+    @MaxLength(500)
     description: string;
 
     @IsOptional()
