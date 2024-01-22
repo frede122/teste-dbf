@@ -23,6 +23,7 @@ export class ProductFormComponent implements OnInit {
   options: Category[] = [];
   filteredOptions?: Observable<Category[]>;
   isNew: boolean = true;
+  file?: any;
 
   constructor(
     private categoryService: CategoryService,
@@ -34,15 +35,16 @@ export class ProductFormComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data: Product
   ) {
     this.productForm = new FormGroup({
-      name: new FormControl("", [Validators.required]),
-      description: new FormControl("", [Validators.required]),
+      name: new FormControl("", [Validators.required, Validators.maxLength(100)]),
+      description: new FormControl("", [Validators.required, Validators.maxLength(500)]),
       value: new FormControl("", [Validators.required, ValidatorsForm.isMoney()]),
+      file: new FormControl(""),
       category: new FormControl("", [Validators.required])
     });
-    
+
   }
-  
-  
+
+
   ngOnInit() {
     this.loadCategory();
     if (this.data) {
@@ -52,8 +54,8 @@ export class ProductFormComponent implements OnInit {
 
   }
 
-  loadCategory(){
-    this.categoryService.getAll().subscribe((data: Category[]) =>{
+  loadCategory() {
+    this.categoryService.getAll().subscribe((data: Category[]) => {
       this.options = data;
       this.filteredOptions = this._filterInit();
     })
@@ -64,7 +66,14 @@ export class ProductFormComponent implements OnInit {
     control.setValue(
       control.value.replace(/\D/g,
         function (match: string) {
-          return match === "," ? match : "";
+          if(match === ","){
+            return match
+          }else{
+            if(match === "."){
+              return ","
+            }
+          }
+          return "";
         })
     );
   }
@@ -106,30 +115,47 @@ export class ProductFormComponent implements OnInit {
 
   onSubmit() {
     if (this.productForm.valid) {
-      let data: Product = this.isNew ? new Product("","",new Category(""),0) : this.data;
+      let data: Product = this.isNew ? new Product("", "", new Category(""), 0) : this.data;
       data.name = this.productForm.value.name;
       data.description = this.productForm.value.description;
-      data.value = parseFloat(this.productForm.value.value);
+      data.value = Number(this.productForm.value.value.replace(',', '.'));
       data.category = this.productForm.value.category;
-      this.isNew ? this.create(data) : this.update(data.id, data);
+      if(this.isNew){
+        this.file? this.createWithPhoto(data) : this.create(data);
+      }else{
+        this.update(data.id, data);
+      }
     } else {
       this.openSnackBar("campos invalidos!")
     }
   }
 
-  create(product: Product){
-    console.log(product)
-    this.productService.create(product).subscribe((data)=>{
+  createWithPhoto(product: Product) {
+    if (this.file)
+      this.productService.uploadPhoto(this.file).subscribe((data) => {
+        product.image_path = data.img_path;
+        this.create(product)
+      })
+  }
+
+  create(product: Product) {
+    this.productService.create(product).subscribe((data) => {
       this.openSnackBar("salvo com sucesso!");
       this.dialogRef.close(data);
     })
   }
-  update(id: number, product: Product){
-    this.productService.update(id, product).subscribe((data)=>{
+  update(id: number, product: Product) {
+    this.productService.update(id, product).subscribe((data) => {
       this.openSnackBar("salvo com sucesso!");
       this.dialogRef.close(data);
     })
   }
+
+  fileSelected(event: Event) {
+    const ev = (event.target as HTMLInputElement);
+    this.file = ev.files ? ev.files[0] : null
+  }
+
 
 }
 

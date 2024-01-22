@@ -8,8 +8,9 @@
     <form [formGroup]="productForm" class="form" (ngSubmit)="onSubmit()">
         <mat-form-field appearance="outline" class="product">
             <mat-label>Nome</mat-label>
-            <input matInput placeholder="Nome do Produto" formControlName="name">
+            <input matInput #name placeholder="Nome do Produto" formControlName="name">
             <mat-error>{{ errorMessage.getMessage(productForm.controls['name']) }}</mat-error>
+            <mat-hint>Caracteres: {{name.value.length}} / 100</mat-hint>
         </mat-form-field>
 
         <mat-form-field appearance="outline" class="category">
@@ -36,9 +37,18 @@
 
         <mat-form-field appearance="outline" class="description">
             <mat-label>Descrição</mat-label>
-            <textarea matInput placeholder="Descrição ..." formControlName="description"></textarea>
+            <textarea matInput placeholder="Descrição ..." #description formControlName="description"></textarea>
             <mat-error>{{ errorMessage.getMessage(productForm.controls['description']) }}</mat-error>
+            <mat-hint>Caracteres: {{description.value.length}} / 500</mat-hint>
         </mat-form-field>
+
+        <mat-form-field appearance="outline" class="product" (click)="fileInput.click()">
+            <mat-label>Selecione uma foto</mat-label>
+            <input formControlName="file" matInput [value]="fileInput.value" readonly>
+            <mat-icon matSuffix (click)="fileInput.click()">folder</mat-icon>
+            <input hidden (change)="fileSelected($event)" type="file" #fileInput />
+        </mat-form-field>
+
 
         <div class="action">
             <button type="submit" mat-raised-button color="primary">{{isNew ? "Salvar" : "Alterar"}}</button>

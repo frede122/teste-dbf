@@ -10,6 +10,7 @@ import { ProductFormComponent } from '../product-form/product-form.component';
 import { ConfirmDialogComponent } from 'src/app/shared/components/confirm-dialog/confirm-dialog.component';
 import { ProductService } from 'src/app/services/products/product.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-product-list',
@@ -30,6 +31,7 @@ export class ProductListComponent implements AfterViewInit, OnInit{
   dataSource: MatTableDataSource<Product>;
   loading: boolean = true;
   expandedElement: Product | null = null;
+  url: string
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
@@ -40,6 +42,7 @@ export class ProductListComponent implements AfterViewInit, OnInit{
     private _snackBar: MatSnackBar,
   ) {
     this.dataSource = new MatTableDataSource<Product>();
+    this.url = environment.apiUrl;
   }
 
   ngOnInit(): void {

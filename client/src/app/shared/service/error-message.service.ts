@@ -11,6 +11,7 @@ export class ErrorMessageService {
   getMessage(control: AbstractControl | null): string {
     const errorMessages: { [key: string]: string } = {
       required: 'Campo obrigatório, entre com algum valor',
+      maxlength: 'quantidade de caracteres ultrapassa o maximo permitido',
       notNumber: 'Valor inserido não é um numero',
       negativeNumber: 'Valores negativos não são permitidos',
       zero: 'O valor não pode ser zero',
