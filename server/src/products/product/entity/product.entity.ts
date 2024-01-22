@@ -11,6 +11,9 @@ export class Product extends AbstractEntity{
     @Column({ nullable: false })
     description: string;
 
+    @Column({ nullable: true })
+    image_path: string;
+
     @Column({ nullable: false, type: 'decimal' })
     value: number;
 

@@ -3,6 +3,8 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { RouterModule } from '@nestjs/core';
+import { ServeStaticModule } from '@nestjs/serve-static';
+import { join } from 'path';
 import { ProductsModule } from './products/products.module';
 import { Category } from './products/category/entity/category.entity';
 import { Product } from './products/product/entity/product.entity';
@@ -30,6 +32,10 @@ const ENTITY = [
       synchronize: false,
     }),
     RouterModule.register(ROUTER),
+    ServeStaticModule.forRoot({
+      rootPath: join(__dirname, '..', 'storage', 'photos'), 
+      serveRoot: '/storage',
+    }),
     ProductsModule
   ],
   controllers: [AppController],

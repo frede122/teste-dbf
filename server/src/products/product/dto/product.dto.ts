@@ -1,5 +1,5 @@
 import { Category } from "../../../products/category/entity/category.entity";
-import { IsNumber, IsObject, IsString } from 'class-validator';
+import { IsNumber, IsObject, IsOptional, IsString } from 'class-validator';
 
 export class ProductDTO{
 
@@ -8,6 +8,10 @@ export class ProductDTO{
 
     @IsString()    
     description: string;
+
+    @IsOptional()
+    @IsString()    
+    image_path: string;
 
     @IsNumber()
     value: number;
