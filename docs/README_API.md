@@ -50,7 +50,7 @@ CategoryDTO : boolean active
 | POST | /products/product/photo | upload(file)| |
 | GET | /products/product | index()| [Index Product ](#index-product)  |
 | GET | /products/product/:id | show(id)| [Show Product ](#show-product)  |
-| PUT | /products/product/:id | update(id, data)| [Create Category ](#update-product) |
+| PUT | /products/product/:id | update(id, data)| [Update Product ](#update-product) |
 | DELETE | /products/product/:id | delete(id)| [Delete Product ](#delete) |
 
 ### JSON validos para Produtos
@@ -69,21 +69,7 @@ exemplo de JSON válido para envio via POST
         }
 }
 ```
-#### update product
-exemplo de JSON válido para envio via PUT
-```json
-{
-        "name": "Maçã",
-        "description": "fruta doce",
-        "image_path": null,
-        "value": 3.55,
-        "category": {
-            "id": 1,
-            "name": "frutas",
-            "active": true
-        }
-}
-```
+
 #### index product
 exemplo de JSON válido recebido via GET
 ```json
@@ -131,7 +117,21 @@ exemplo de JSON válido recebido via GET
     }
   }
 ```
-
+#### update product
+exemplo de JSON válido para envio via PUT
+```json
+{
+        "name": "Maçã",
+        "description": "fruta doce",
+        "image_path": null,
+        "value": 3.55,
+        "category": {
+            "id": 1,
+            "name": "frutas",
+            "active": true
+        }
+}
+```
 
 ### Categorias
 | Req. Http | Url | Função | Exemplos: JSON 
@@ -139,7 +139,7 @@ exemplo de JSON válido recebido via GET
 | POST | /products/category | create(data)| [Create Category ](#create-category) |
 | GET | /products/category | index()| [Index Category ](#index-category)  |
 | GET | /products/category/:id | show(id)| [Show Category ](#show-category) |
-| PUT | /products/category/:id | update(id, data)| [Create Category ](#update-category)  |
+| PUT | /products/category/:id | update(id, data)| [Update Category ](#update-category)  |
 | DELETE | /products/category/:id | delete(id)| [Delete Category ](#delete) |
 
 
@@ -151,13 +151,7 @@ exemplo de JSON válido para envio via POST
     "name": " frutas"
 }
 ```
-#### update category
-exemplo de JSON válido para envio via PUT
-```json
-{
-    "name": " frutas"
-}
-```
+
 #### index category
 exemplo de JSON válido recebido via GET
 ```json
@@ -183,6 +177,13 @@ exemplo de JSON válido recebido via GET
         "name": "frutas",
         "active": true
     }
+```
+#### update category
+exemplo de JSON válido para envio via PUT
+```json
+{
+    "name": " frutas"
+}
 ```
 #### delete 
 exemplo de JSON válido recebido via GET
