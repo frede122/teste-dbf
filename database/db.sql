@@ -12,7 +12,24 @@
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
--- Copiando dados para a tabela teste-dbf.categories: ~1 rows (aproximadamente)
+
+-- Copiando estrutura do banco de dados para teste-dbf
+DROP DATABASE IF EXISTS `teste-dbf`;
+CREATE DATABASE IF NOT EXISTS `teste-dbf` /*!40100 DEFAULT CHARACTER SET utf8 */;
+USE `teste-dbf`;
+
+-- Copiando estrutura para tabela teste-dbf.categories
+DROP TABLE IF EXISTS `categories`;
+CREATE TABLE IF NOT EXISTS `categories` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(50) NOT NULL,
+  `active` tinyint(4) NOT NULL DEFAULT '1',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `name_UNIQUE` (`name`)
+) ENGINE=InnoDB AUTO_INCREMENT=104 DEFAULT CHARSET=utf8;
+
+-- Copiando dados para a tabela teste-dbf.categories: ~3 rows (aproximadamente)
+DELETE FROM `categories`;
 /*!40000 ALTER TABLE `categories` DISABLE KEYS */;
 INSERT INTO `categories` (`id`, `name`, `active`) VALUES
 	(1, 'Frutas', 1),
@@ -20,7 +37,22 @@ INSERT INTO `categories` (`id`, `name`, `active`) VALUES
 	(3, 'Limpeza', 0);
 /*!40000 ALTER TABLE `categories` ENABLE KEYS */;
 
--- Copiando dados para a tabela teste-dbf.products: ~0 rows (aproximadamente)
+-- Copiando estrutura para tabela teste-dbf.products
+DROP TABLE IF EXISTS `products`;
+CREATE TABLE IF NOT EXISTS `products` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(100) NOT NULL,
+  `description` varchar(500) NOT NULL,
+  `value` decimal(12,2) NOT NULL DEFAULT '0.00',
+  `image_path` varchar(300) DEFAULT NULL,
+  `category_id` int(11) NOT NULL,
+  PRIMARY KEY (`id`,`category_id`),
+  KEY `fk_products_category_idx` (`category_id`),
+  CONSTRAINT `fk_products_category` FOREIGN KEY (`category_id`) REFERENCES `categories` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8;
+
+-- Copiando dados para a tabela teste-dbf.products: ~5 rows (aproximadamente)
+DELETE FROM `products`;
 /*!40000 ALTER TABLE `products` DISABLE KEYS */;
 INSERT INTO `products` (`id`, `name`, `description`, `value`, `image_path`, `category_id`) VALUES
 	(13, 'Maçã', 'A maçã é uma fruta popular que é cultivada em todo o mundo. É o fruto da macieira, uma árvore da família Rosaceae. As maçãs são redondas ou ovaladas, com uma casca lisa e uma polpa suculenta. O sabor das maçãs pode variar de doce a azedo, dependendo da variedade.\n\nAs maçãs são uma boa fonte de vitaminas e minerais, incluindo vitamina C, vitamina K, fibras e potássio. Elas também são uma boa fonte de antioxidantes, que podem ajudar a proteger as células contra danos.', 2.56, 'storage/maca.png', 1),
