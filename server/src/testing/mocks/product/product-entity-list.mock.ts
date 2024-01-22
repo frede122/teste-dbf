@@ -1,10 +1,10 @@
 export const productEntityList  = [
     {
-        // (1, 'frutas', true),(2, 'verduras', true),  (3, 'outros', true)
         id: 1,
         name: "laranja",
         description: "laranja",
         value: 1,
+        image_path: "",
         category: {
             id: 1,
             name: "frutas",
@@ -16,6 +16,7 @@ export const productEntityList  = [
         name: "alface",
         description: "roxa",
         value: 1,
+        image_path: "",
         category: {
             id: 2,
             name: "verduras",
@@ -27,6 +28,7 @@ export const productEntityList  = [
         name: "maçã",
         description: "vermelha",
         value: 1,
+        image_path: "",
         category: {
             id: 3,
             name: "outros",

@@ -12,7 +12,7 @@ export class Product extends AbstractEntity{
     description: string;
 
     @Column({ nullable: true })
-    image_path: string;
+    image_path?: string;
 
     @Column({ nullable: false, type: 'decimal' })
     value: number;

@@ -7,8 +7,6 @@ import { Product } from './entity/product.entity';
 import { productEntityList } from '../../testing/mocks/product/product-entity-list.mock';
 import { responseDelete } from '../../testing/response-delete';
 import { responseUpdate } from '../../testing/response-update';
-import { productEntityListFail } from '../../testing/mocks/product/product-entity-list.mock-fail';
-import { responseInvalidFields } from '../../testing/response/response-invalid-fields';
 
 describe('ProductController', () => {
   let controller: ProductController;

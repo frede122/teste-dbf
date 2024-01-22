@@ -13,7 +13,7 @@ export class ProductDTO{
 
     @IsOptional()
     @IsString()    
-    image_path: string;
+    image_path?: string;
 
     @IsNumber()
     value: number;
