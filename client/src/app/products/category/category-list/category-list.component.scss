@@ -101,3 +101,71 @@ th {
     display: flex;
     justify-content: end
 }
+
+@media (max-width: 600px) {
+
+    table,
+    .search {
+      width: 80%;
+      max-width: 80%;
+      min-width: auto;
+    }
+  
+    .search {
+      min-width: auto
+    }
+  
+    #list-category .button-add {
+      position: absolute;
+      top: 25px;
+      left: 35px;
+    }
+  
+    .button-add::after {
+    position: absolute;
+    content: 'Adicionar novo';
+    width: 120px;
+    height: 40px;
+    background-color: #3f51b562;
+    border-radius: 5px;
+    top: 8px;
+    left: 65px;
+    text-align: center;
+    line-height: 37px;
+    transition: .5s;
+    
+  }
+  
+  .button-add::before {
+    position: absolute;
+    border-radius: 0;
+    width: 0;
+    height: 0;
+    border-top: 10px solid transparent;
+    border-bottom: 10px solid transparent;
+    border-right: 10px solid #3f51b562;
+    top: 18px;
+    left: 46px;
+    transition: .5s;
+  }
+  
+  .button-add:hover::after {
+    background-color: #3f51b5;
+  }
+  
+  .button-add:hover::before {
+    border-left: 10px solid #3f51b5;
+  }
+  
+    #list-category {
+      overflow-x: auto;
+      padding-top: 50px;
+      max-width: 90%;
+    }
+    .container {
+      overflow-x: hidden;
+      margin: 15px 0;
+      padding: 0;
+      max-width: 100vw;
+    }
+  }
