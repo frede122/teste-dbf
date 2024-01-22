@@ -29,7 +29,6 @@ export class ProductController extends BaseController {
     async upload(@UploadedFile('file') file : Express.Multer.File) {
         const path = join(__dirname, '..','..','..', 'storage', 'photos', file.originalname)
         await writeFile(path, file.buffer);
-        // return JSON.parse('storage/'+file.originalname)
         
         return { img_path: 'storage/'+file.originalname}
     }
