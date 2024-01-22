@@ -1,5 +1,5 @@
 import { Body, Controller, Get, Param, ParseIntPipe, Patch, Post, Put } from '@nestjs/common';
-import { BaseController } from 'src/base/base.controller';
+import { BaseController } from '../../base/base.controller';
 import { Product } from './entity/product.entity';
 import { ProductService } from './product.service';
 import { ProductDTO } from './dto/product.dto';

@@ -1,5 +1,5 @@
-import { AbstractEntity } from "src/base/abstract.entity";
-import { Category } from "src/products/category/entity/category.entity";
+import { AbstractEntity } from "../../../base/abstract.entity";
+import { Category } from "../../../products/category/entity/category.entity";
 import { Column, Entity, JoinColumn, OneToOne } from "typeorm";
 
 @Entity('products')

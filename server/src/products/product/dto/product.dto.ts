@@ -1,4 +1,4 @@
-import { Category } from "src/products/category/entity/category.entity";
+import { Category } from "../../../products/category/entity/category.entity";
 import { IsNumber, IsObject, IsString } from 'class-validator';
 
 export class ProductDTO{
