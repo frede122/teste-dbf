@@ -44,31 +44,153 @@ CategoryDTO : boolean active
 ## EndPoints
 
 ### Produtos
-| Req. Http | Url | Função
-|---| ---| ---|
-| POST | /products/product | create(data)|
-| POST | /products/product/photo | upload(file)|
-| GET | /products/product | index()|
-| GET | /products/product/:id | show(id)|
-| PUT | /products/product/:id | update(id, data)|
-| DELETE | /products/product/:id | delete(id)|
+| Req. Http | Url | Função | Exemplos: JSON 
+|---| ---| ---| ---|
+| POST | /products/product | create(data)|[Create Product ](#create-product) |
+| POST | /products/product/photo | upload(file)| |
+| GET | /products/product | index()| [Index Product ](#index-product)  |
+| GET | /products/product/:id | show(id)| [Show Product ](#show-product)  |
+| PUT | /products/product/:id | update(id, data)| [Create Category ](#update-product) |
+| DELETE | /products/product/:id | delete(id)| [Delete Product ](#delete) |
+
+### JSON validos para Produtos
+#### create product
+exemplo de JSON válido para envio via POST
+```json
+{
+        "name": "Mação)",
+        "description": "fruta doce",
+        "image_path": null,
+        "value": 3.55,
+        "category": {
+            "id": 1,
+            "name": "frutas",
+            "active": true
+        }
+}
+```
+#### update product
+exemplo de JSON válido para envio via PUT
+```json
+{
+        "name": "Maçã",
+        "description": "fruta doce",
+        "image_path": null,
+        "value": 3.55,
+        "category": {
+            "id": 1,
+            "name": "frutas",
+            "active": true
+        }
+}
+```
+#### index product
+exemplo de JSON válido recebido via GET
+```json
+[
+    {
+      "id": 1,
+      "name": "Maçã",
+      "description": "fruta doce",
+      "image_path": null,
+      "value": 3.55,
+      "category": {
+          "id": 1,
+          "name": "frutas",
+          "active": true
+      }
+    },
+    {
+      "id": 2,
+      "name": "Banana",
+      "description": "fruta doce",
+      "image_path": null,
+      "value": 1.65,
+      "category": {
+          "id": 1,
+          "name": "frutas",
+          "active": true
+      }
+    }
+]
+```
+
+#### show product
+exemplo de JSON válido recebido via GET
+```json
+  {
+    "id": 1,
+    "name": "Maçã",
+    "description": "fruta doce",
+    "image_path": null,
+    "value": 3.55,
+    "category": {
+        "id": 1,
+        "name": "frutas",
+        "active": true
+    }
+  }
+```
+
 
 ### Categorias
-| Req. Http | Url | Função | Exe: JSON Válido
+| Req. Http | Url | Função | Exemplos: JSON 
 |---| ---| ---| ---|
 | POST | /products/category | create(data)| [Create Category ](#create-category) |
-| GET | /products/category | index()|  |
-| GET | /products/category/:id | show(id)| |
-| PUT | /products/category/:id | update(id, data)| |
-| DELETE | /products/category/:id | delete(id)| |
+| GET | /products/category | index()| [Index Category ](#index-category)  |
+| GET | /products/category/:id | show(id)| [Show Category ](#show-category) |
+| PUT | /products/category/:id | update(id, data)| [Create Category ](#update-category)  |
+| DELETE | /products/category/:id | delete(id)| [Delete Category ](#delete) |
 
 
 ### JSON validos para Categoria
 #### create category
-[Create Category]([create-category])
+exemplo de JSON válido para envio via POST
 ```json
 {
     "name": " frutas"
+}
+```
+#### update category
+exemplo de JSON válido para envio via PUT
+```json
+{
+    "name": " frutas"
+}
+```
+#### index category
+exemplo de JSON válido recebido via GET
+```json
+[
+    {
+        "id": 1,
+        "name": "frutas",
+        "active": true
+    },
+    {
+        "id": 2,
+        "name": " verduras",
+        "active": true
+    }
+]
+```
+
+#### show category
+exemplo de JSON válido recebido via GET
+```json
+    {
+        "id": 1,
+        "name": "frutas",
+        "active": true
+    }
+```
+#### delete 
+exemplo de JSON válido recebido via GET
+```json
+{
+    "generatedMaps": [],
+    "raw": [],
+    "affected": 1
 }
 ```
 
