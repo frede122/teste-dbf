@@ -11,8 +11,8 @@ para
 > environments
 
 ### Documentação API
-* [Documentação API](docs/README_API.md)
-* [Configuração e Instalação](server/README.md)
+* [Documentação API](README_API.md)
+* [Configuração e Instalação](../server/README.md)
 ### Documentação Client
-* [Documentação Client](docs/README_CLIENT.md)
-* [Configuração e Instalação](client/README.md)
+* [Documentação Client](README_CLIENT.md)
+* [Configuração e Instalação](../client/README.md)
