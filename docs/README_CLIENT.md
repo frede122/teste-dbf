@@ -1,3 +1,5 @@
+## Configuração e Instalação
+* [Configuração e Instalação](../client/README.md)
 ## Estrutura e padrão
 O projeto esta estruturado em modulo por padrão do angular, por exemplo o modulo de produtos possui sua propria pasta, onde contém sua controller, service, arquivos DTOs e Entitys
 
