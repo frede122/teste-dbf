@@ -1,5 +1,5 @@
 import { Body, Controller, Param, ParseIntPipe, Patch, Post, Put } from '@nestjs/common';
-import { BaseController } from 'src/base/base.controller';
+import { BaseController } from "../../base/base.controller"
 import { CategoryService } from './category.service';
 import { CategoryDTO } from './dto/category.dto';
 

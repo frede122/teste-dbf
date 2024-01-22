@@ -7,6 +7,6 @@ export abstract class AbstractEntity {
         'increment', 
         { unsigned: true }
     )
-    id: number;
+    id?: number;
 
 }

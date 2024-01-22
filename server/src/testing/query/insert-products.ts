@@ -1,0 +1,1 @@
+export const insertProducts = "INSERT INTO products (`id`, `name`, `description`, `value`, `category_id`) VALUES  (1, 'laranja', 'laranja', 1, 1),  (2, 'alface', 'roxa', 1, 2), (3, 'maçã', 'vermelha', 1, 3);"
