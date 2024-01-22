@@ -1,3 +1,18 @@
+## Env
+Renomei e adicone informações do servidor
+> environment.example.ts
+
+para
+
+> environment.ts
+
+### Informações
+Veja um exemplo de configuração válida environment.ts
+``` typescript
+export const environment = {
+    apiUrl : "http://127.0.0.1:3000"
+};
+```
 ## Instalação de dependências
 
 ```bash
