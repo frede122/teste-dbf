@@ -14,6 +14,24 @@ Dependências usadas no projeto.
 |---| ---|
 | @types/multer | ^1.4.11 |
 
+## Env
+Renomei e adicone informações no servidor
+> .env.example
+
+para
+
+> .env
+
+### Informações
+Veja um exemplo de configuração válida .env
+``` env
+HOST = 'localhost'
+PORT = '3306'
+USER = 'root'
+PASSWORD = "123456"
+DATABASE = "teste-dbf"
+```
+
 ## Instalação de dependências
 
 ```bash
