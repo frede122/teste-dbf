@@ -1,4 +1,4 @@
-![image](https://github.com/frede122/teste-dbf/assets/14980935/d5eb2766-b5f7-4cfe-8e71-97dc0fb2c7d9)![image](https://github.com/frede122/teste-dbf/assets/14980935/d16f758c-7c80-4ae9-975d-441e9a5f30a9)## Env
+## Env
 Renomei e adicone informações do servidor
 > environment.example.ts
 
